@@ -3,7 +3,8 @@
 @author Shayna Jamieson
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/views/home.html
-Date: January 16, 2020
+Created: January 16, 2020
+Last Modified: January 17, 2020
 Description: This file serves as our home/splash page for our dating website. Here the user
 is welcomed with a nice image, and a brief description of the services the site offers.
 -->
@@ -15,11 +16,12 @@ is welcomed with a nice image, and a brief description of the services the site 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <!--    <link rel="stylesheet" type="text/css" href="styles/styles.css">-->
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
-    <link rel="manifest" href="../images/site.webmanifest">
+    <link rel="manifest" href="../images/site.webmanifest"> <!-- app icon -->
     <title>Dating</title>
 </head>
 <body>
@@ -58,11 +60,12 @@ is welcomed with a nice image, and a brief description of the services the site 
                     </div>
                 </div>
                 <button type="button" class="btn btn-lg btn-dark mt-4 mb-5">Create a Profile!</button>
-            </div>
+            </div> <!-- end of column that holds our home page description -->
             <div class="col-md-6">
-                <img id="splash-image" class="img-fluid" src="images/splash.png" alt="Image of Two People In Love">
-            </div>
-        </div>
+<!--                <img id="splash-image" class="rounded pb-5" src="images/splash.png" alt="Image of Two People In Love">-->
+                <img id="splash-image" class="rounded pb-5" src="../images/splash.png" alt="Image of Two People In Love">
+            </div> <!-- end of column that holds our image -->
+        </div> <!-- row that holds our home page description and image -->
     </div> <!-- end of body content container and bootstrap padding -->
 <script src="//code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

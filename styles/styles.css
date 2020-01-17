@@ -1,15 +1,14 @@
-@charset "utf-8";
-
-/* import Google Free Fonts*/
-@import url('https://fonts.googleapis.com/css?family=Poppins|Roboto&display=swap');
-
 /*
 @author Shayna Jamieson
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/styles/styles.css
-Date: January 16, 2020
+Created: January 16, 2020
+Last Modified: January 17, 2020
 Description: This file serves as our style sheet for the existing pages on the dating website.
 */
+
+/* import Google Free Fonts*/
+@import url('https://fonts.googleapis.com/css?family=Poppins|Roboto&display=swap');
 
 /* font Roboto applied to all body text */
 body {
@@ -26,7 +25,6 @@ body {
 
 /* styling for home page image */
 #splash-image {
-    border-radius: 3%;
     width: 90%;
     height: auto;
 }
