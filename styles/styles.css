@@ -48,6 +48,8 @@ body {
 #testimonial-white-bg {
     background-color: white;
     padding: 3px;
+    margin-left: -1px;
+    margin-right: -1px;
 }
 
 
