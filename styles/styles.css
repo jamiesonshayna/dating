@@ -1,0 +1,54 @@
+/*
+@author Shayna Jamieson
+@version 1.0
+URL: http://sjamieson.greenriverdev.com/328/dating/styles/styles.css
+Date: January 16, 2020
+Description: This file serves as our style sheet for the existing pages on the dating website.
+*/
+
+/* import Google Free Fonts*/
+@import url('https://fonts.googleapis.com/css?family=Poppins|Roboto&display=swap');
+
+/* font Roboto applied to all body text */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* styling for home page title */
+#homepage-title {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 4vw;
+    font-family: 'Poppins', cursive !important;
+}
+
+/* styling for home page image */
+#splash-image {
+    border-radius: 3%;
+    width: 90%;
+    height: auto;
+}
+
+/* styling for the container that holds home page testimonials*/
+#testimonial-container {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-left: 1px solid white;
+    margin: 0 10px;
+    background: linear-gradient(to right, red, orange);
+}
+
+/* style for the testimonial title on home page */
+#testimonial-title {
+    font-weight: bolder;
+    font-size: larger;
+}
+
+/* styles to help clear gradient background */
+#testimonial-white-bg {
+    background-color: white;
+    padding: 3px;
+}
+
+
+
