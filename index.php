@@ -28,5 +28,12 @@ $f3->route('GET /', function() {
     echo $view->render('views/home.html');
 });
 
+// define a route that will take the user to the create a profile form
+// this will be the first screen the user sees after they click 'create a profile'
+$f3->route('GET /sign-up/personal-information', function() {
+    $view = new Template();
+    echo $view->render('views/personal-information.html');
+});
+
 // fun Fat-Free
 $f3->run();
