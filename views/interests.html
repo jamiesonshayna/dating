@@ -10,10 +10,10 @@ accepts user information for their indoor and outdoor interests.
 <include href="views/header-with-nav.html">
     <div class="container card mt-3">
         <div class="card-body">
-            <h1 class="toast-header text-dark">Interests</h1>
+            <h1 id="interests-header" class="toast-header text-dark">Interests</h1>
             <form method="post" action="summary">
                 <label for="tv" class="font-weight-bold">In-door Interests</label><br>
-                <div class="row">
+                <div class="row pl-2">
                     <div class="col-md-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="tv" id="tv">
@@ -72,7 +72,7 @@ accepts user information for their indoor and outdoor interests.
                     </div> <!-- end of column with board games and video games checkboxes -->
                 </div> <!-- end of row with in-door interests selections -->
                 <label for="hiking" class="font-weight-bold pt-3">Out-door Interests</label><br>
-                <div class="row">
+                <div class="row pl-2">
                     <div class="col-md-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="outdoor-interests[]" value="hiking" id="hiking">

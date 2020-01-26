@@ -3,7 +3,7 @@
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/styles/styles.css
 Created: January 16, 2020
-Last Modified: January 17, 2020
+Last Modified: January 26, 2020
 Description: This file serves as our style sheet for the existing pages on the dating website.
 */
 
@@ -13,7 +13,12 @@ Description: This file serves as our style sheet for the existing pages on the d
 /* style to align the bio title and display section */
 #bio-section {
     margin-top: -10px;
-    margin-left: 3px;
+    margin-left: 1px;
+}
+
+/* style to make the biography summary title larger than its description text */
+#bio-title {
+    font-size: large;
 }
 
 /* styling for home page title */
@@ -22,6 +27,16 @@ Description: This file serves as our style sheet for the existing pages on the d
     white-space: nowrap;
     font-size: 4vw;
     font-family: 'Poppins', cursive !important;
+}
+
+/* style header to line up with checkbox headers on interests page */
+#interests-header {
+    margin-left: -15px;
+}
+
+/* style to get privacy section aligned with first name field */
+#privacy {
+    margin-top: 24px;
 }
 
 /* styling for home page image */
