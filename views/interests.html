@@ -10,9 +10,116 @@ accepts user information for their indoor and outdoor interests.
 <include href="views/header-with-nav.html">
     <div class="container card mt-3">
         <div class="card-body">
+            <h1 class="toast-header text-dark">Interests</h1>
             <form method="post" action="summary">
+                <label for="tv" class="font-weight-bold">In-door Interests</label><br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="tv" id="tv">
+                            <label class="form-check-label" for="tv">
+                                tv
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="puzzles" id="puzzles">
+                            <label class="form-check-label" for="puzzles">
+                                puzzles
+                            </label>
+                        </div>
+                    </div> <!-- end of column with tv and puzzles checkboxes -->
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="movies" id="movies">
+                            <label class="form-check-label" for="movies">
+                                movies
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="reading" id="reading">
+                            <label class="form-check-label" for="reading">
+                                reading
+                            </label>
+                        </div>
+                    </div> <!-- end of column with movies and reading checkboxes -->
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="cooking" id="cooking">
+                            <label class="form-check-label" for="cooking">
+                                cooking
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="playing cards" id="playing-cards">
+                            <label class="form-check-label" for="playing-cards">
+                                playing cards
+                            </label>
+                        </div>
+                    </div> <!-- end of column with cooking and playing cards checkboxes -->
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="board games" id="board-games">
+                            <label class="form-check-label" for="board-games">
+                                board games
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="video games" id="video-games">
+                            <label class="form-check-label" for="video-games">
+                                video games
+                            </label>
+                        </div>
+                    </div> <!-- end of column with board games and video games checkboxes -->
+                </div> <!-- end of row with in-door interests selections -->
+                <label for="hiking" class="font-weight-bold pt-3">Out-door Interests</label><br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="outdoor-interests[]" value="hiking" id="hiking">
+                            <label class="form-check-label" for="hiking">
+                                hiking
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="outdoor-interests[]" value="walking" id="walking">
+                            <label class="form-check-label" for="walking">
+                                walking
+                            </label>
+                        </div>
+                    </div> <!-- end of column with hiking and walking checkboxes -->
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="outdoor-interests[]" value="biking" id="biking">
+                            <label class="form-check-label" for="biking">
+                                biking
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="indoor-interests[]" value="climbing" id="climbing">
+                            <label class="form-check-label" for="climbing">
+                                climbing
+                            </label>
+                        </div>
+                    </div> <!-- end of column with biking and climbing checkboxes -->
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="outdoor-interests[]" value="swimming" id="swimming">
+                            <label class="form-check-label" for="swimming">
+                                swimming
+                            </label>
+                        </div>
+                    </div> <!-- end of column with swimming checkboxes -->
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="outdoor-interests[]" value="collecting" id="collecting">
+                            <label class="form-check-label" for="collecting">
+                                collecting
+                            </label>
+                        </div>
+                    </div> <!-- end of column with collecting checkboxes -->
+                </div> <!-- end of row with outdoor interests selections -->
                 <div class="text-center">
-                    <button type="submit" class="btn btn-dark">Contact Me!</button>
+                    <button type="submit" class="btn-sm btn-dark float-right">Next ></button>
                 </div>
             </form> <!-- end of form that holds our submit button (routed to first sign-up screen) -->
         </div>

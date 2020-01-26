@@ -11,9 +11,9 @@ Description: This file serves as our style sheet for the existing pages on the d
 @import url('https://fonts.googleapis.com/css?family=Poppins|Roboto&display=swap');
 
 /* font Roboto applied to all body text */
-body {
-    font-family: 'Roboto', sans-serif;
-}
+/*body {*/
+/*    font-family: 'Roboto', sans-serif;*/
+/*}*/
 
 /* styling for home page title */
 #homepage-title {

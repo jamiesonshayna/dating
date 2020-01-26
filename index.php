@@ -65,5 +65,16 @@ $f3->route('POST /interests', function() {
     echo $view->render('views/interests.html');
 });
 
+// define a route that will take the user to the summary screen of create a profile
+// this page will display the users form fields that were filled out
+$f3->route('POST /summary', function() {
+    // save user information in our session
+    $_SESSION['indoor-interests'] = $_POST['indoor-interests'];
+    $_SESSION['outdoor-interests'] = $_POST['outdoor-interests'];
+
+    $view = new Template();
+    echo $view->render('views/summary.html');
+});
+
 // fun Fat-Free
 $f3->run();
