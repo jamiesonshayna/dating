@@ -69,17 +69,11 @@ $f3->route('POST /interests', function() {
 // define a route that will take the user to the summary screen of create a profile
 // this page will display the users form fields that were filled out
 $f3->route('POST /summary', function() {
-    // loop through our indoor and outdoor interests arrays to make an interests String
+    // loop through our interests POST arrays to make an interests String
     $interests = "";
 
-    if(is_array($_POST['indoor-interests'])) {
-        foreach($_POST['indoor-interests'] as $value) {
-            $interests .= $value . " ";
-        }
-    }
-
-    if(is_array($_POST['outdoor-interests'])) {
-        foreach($_POST['outdoor-interests'] as $value) {
+    if(is_array($_POST['interests'])) {
+        foreach($_POST['interests'] as $value) {
             $interests .= $value . " ";
         }
     }

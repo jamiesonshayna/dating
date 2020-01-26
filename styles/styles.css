@@ -29,8 +29,8 @@ Description: This file serves as our style sheet for the existing pages on the d
     font-family: 'Poppins', cursive !important;
 }
 
-/* style header to line up with checkbox headers on interests page */
-#interests-header {
+/* style header to line up with form inputs on form pages */
+.toast-header {
     margin-left: -15px;
 }
 
