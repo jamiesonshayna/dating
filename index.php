@@ -31,15 +31,6 @@ $f3->route('GET /', function() {
     echo $view->render('views/home.html');
 });
 
-// crete a route for the navigation bar to return the user to the home page
-$f3->route('GET /home', function() {
-    // create a new view object by instantiating the fat-free templating class
-    $view = new Template();
-
-    // on the object template we render the home page through this route
-    echo $view->render('views/home.html');
-});
-
 // define a route that will take the user to the create a profile form
 // this will be the first screen the user sees after they click 'create a profile'
 $f3->route('GET /personal-information', function() {
