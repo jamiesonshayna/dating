@@ -8,6 +8,9 @@
  * the route of our directory they will be taken to the view that we have defined as views/home.html
  */
 
+// start a session - ONLY ever need to put this in our controller (all other pages get by transference)
+session_start();
+
 // Turn on error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -28,11 +31,34 @@ $f3->route('GET /', function() {
     echo $view->render('views/home.html');
 });
 
+// crete a route for the navigation bar to return the user to the home page
+$f3->route('GET /home', function() {
+    // create a new view object by instantiating the fat-free templating class
+    $view = new Template();
+
+    // on the object template we render the home page through this route
+    echo $view->render('views/home.html');
+});
+
 // define a route that will take the user to the create a profile form
 // this will be the first screen the user sees after they click 'create a profile'
-$f3->route('GET /sign-up/personal-information', function() {
+$f3->route('GET /personal-information', function() {
     $view = new Template();
     echo $view->render('views/personal-information.html');
+});
+
+// define a route that will take the user to the second screen of create a profile
+// this will be the user profile page for email, state, seeking, and a biography.
+$f3->route('POST /profile', function() {
+    // save user information in our session
+    $_SESSION['first-name'] = $_POST['first-name'];
+    $_SESSION['last-name'] = $_POST['last-name'];
+    $_SESSION['age'] = $_POST['age'];
+    $_SESSION['gender'] = $_POST['gender'];
+    $_SESSION['phone'] = $_POST['phone'];
+
+    $view = new Template();
+    echo $view->render('views/profile.html');
 });
 
 // fun Fat-Free

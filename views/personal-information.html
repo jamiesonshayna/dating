@@ -8,7 +8,48 @@ Description: This file serves as first screen of the user's profile registration
 accepts user information such as name, age, gender, and phone number. It posts to the next form (profile).
 -->
 <include href="views/header-with-nav.html">
-    <div class="container">
-        <h1 class="toast-header pt-5">Personal Information</h1>
+    <div class="container card mt-3">
+        <div class="card-body">
+            <h1 class="toast-header text-dark">Personal Information</h1>
+            <form method="post" action="profile">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="first-name" class="font-weight-bold">First Name</label>
+                            <input type="text" class="form-control" id="first-name" name="first-name" aria-describedby="firstName" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name" class="font-weight-bold">Last Name</label>
+                            <input type="text" class="form-control" id="last-name" name="last-name" aria-describedby="lastName" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="age" class="font-weight-bold">Age</label>
+                            <input type="text" class="form-control" id="age" name="age" aria-describedby="age" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender-male" class="font-weight-bold">Gender</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender-male" value="male">
+                                <label class="form-check-label pl-1" for="gender-male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender-female" value="female">
+                                <label class="form-check-label pl-1" for="gender-female">Female</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="font-weight-bold">Phone Number</label>
+                            <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phoneNumber" placeholder="">
+                        </div>
+                    </div> <!-- end of user input area (column)-->
+                    <div class="col-md-4 pt-4">
+                        <div class="alert alert-secondary" role="alert">
+                            <span class="font-weight-bold">Note: </span>All information entered is protected by our <a href="#">privacy policy</a>. Profile information can only be viewed by others with your permission.
+                        </div>
+                    </div>
+                </div> <!-- end of column that has light alert -->
+            <button type="submit" class="btn-sm btn-dark float-right">Next ></button>
+            </form> <!-- end of form that holds our submit button (routed to first sign-up screen) -->
+        </div>
     </div>
     <include href="views/footer.html">
