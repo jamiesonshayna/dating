@@ -10,8 +10,29 @@ page that will display all of the user information that is collected in sessions
 <include href="views/header-with-nav.html">
     <div class="container card mt-3">
         <div class="card-body">
-            <div class="text-center">
-                <button type="submit" class="btn-sm btn-dark">Contact Me!</button>
+            <div class="row">
+                <div class="col-md-6 pb-2">
+                    <div class="card">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Name: {{ @SESSION.first }} {{ @SESSION.last }}</li>
+                            <li class="list-group-item">Gender: {{ @SESSION.gender }}</li>
+                            <li class="list-group-item">Age: {{ @SESSION.age }}</li>
+                            <li class="list-group-item">Phone: {{ @SESSION.phone }}</li>
+                            <li class="list-group-item">Email: {{ @SESSION.email }}</li>
+                            <li class="list-group-item">State: {{ @SESSION.state }}</li>
+                            <li class="list-group-item">Seeking: {{ @SESSION.seeking }}</li>
+                            <li class="list-group-item">Interests: {{ @SESSION.interests }}</li>
+                        </ul>
+                    </div>
+                </div> <!-- end of col that holds profile information -->
+                <div class="col-md-6 text-center">
+                    <img id="user-icon" class="img-fluid rounded mb-5 mx-auto d-none d-md-block" src="images/user-icon.png" alt="Default user icon">
+                    <p><span class="float-left">Biography</span><br></p>
+                    <p id="bio-section" class="pl-1">{{ @SESSION.bio }}</p>
+                </div> <!-- end of col that holds user photo and biography -->
+            </div> <!-- end of row that holds the user basic profile information -->
+            <div class="text-center pt-2">
+                <button type="submit" class="btn btn-dark">Contact Me!</button>
             </div>
         </div>
     </div>

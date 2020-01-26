@@ -42,8 +42,8 @@ $f3->route('GET /personal-information', function() {
 // this will be the user profile page for email, state, seeking, and a biography.
 $f3->route('POST /profile', function() {
     // save user information in our session
-    $_SESSION['first-name'] = $_POST['first-name'];
-    $_SESSION['last-name'] = $_POST['last-name'];
+    $_SESSION['first'] = $_POST['first-name'];
+    $_SESSION['last'] = $_POST['last-name'];
     $_SESSION['age'] = $_POST['age'];
     $_SESSION['gender'] = $_POST['gender'];
     $_SESSION['phone'] = $_POST['phone'];
@@ -68,9 +68,23 @@ $f3->route('POST /interests', function() {
 // define a route that will take the user to the summary screen of create a profile
 // this page will display the users form fields that were filled out
 $f3->route('POST /summary', function() {
-    // save user information in our session
-    $_SESSION['indoor-interests'] = $_POST['indoor-interests'];
-    $_SESSION['outdoor-interests'] = $_POST['outdoor-interests'];
+    // loop through our indoor and outdoor interests arrays to make an interests String
+    $interests = "";
+
+    if(is_array($_POST['indoor-interests'])) {
+        foreach($_POST['indoor-interests'] as $value) {
+            $interests .= $value . " ";
+        }
+    }
+
+    if(is_array($_POST['outdoor-interests'])) {
+        foreach($_POST['outdoor-interests'] as $value) {
+            $interests .= $value . " ";
+        }
+    }
+
+    // save all interests in our session to be displayed in summary
+    $_SESSION['interests'] = $interests;
 
     $view = new Template();
     echo $view->render('views/summary.html');

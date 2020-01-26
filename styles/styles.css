@@ -10,10 +10,10 @@ Description: This file serves as our style sheet for the existing pages on the d
 /* import Google Free Fonts*/
 @import url('https://fonts.googleapis.com/css?family=Poppins|Roboto&display=swap');
 
-/* font Roboto applied to all body text */
-/*body {*/
-/*    font-family: 'Roboto', sans-serif;*/
-/*}*/
+/* style to align the bio title and display section */
+#bio-section {
+    margin-top: -10px;
+}
 
 /* styling for home page title */
 #homepage-title {
@@ -24,12 +24,12 @@ Description: This file serves as our style sheet for the existing pages on the d
 }
 
 /* styling for home page image */
-#splash-image {
+#splash-image, #user-icon {
     width: 90%;
     height: auto;
 }
 
-/* styling for the container that holds home page testimonials*/
+/* styling for the container that holds home page testimonials */
 #testimonial-container {
     padding-top: 1px;
     padding-bottom: 1px;
@@ -52,5 +52,9 @@ Description: This file serves as our style sheet for the existing pages on the d
     margin-right: -1px;
 }
 
-
+/* styling for user icon image */
+#user-icon {
+    width: 50%;
+    height: auto;
+}
 
