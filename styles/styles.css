@@ -13,6 +13,7 @@ Description: This file serves as our style sheet for the existing pages on the d
 /* style to align the bio title and display section */
 #bio-section {
     margin-top: -10px;
+    margin-left: 3px;
 }
 
 /* styling for home page title */

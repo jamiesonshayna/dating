@@ -25,10 +25,12 @@ page that will display all of the user information that is collected in sessions
                         </ul>
                     </div>
                 </div> <!-- end of col that holds profile information -->
-                <div class="col-md-6 text-center">
+                <div class="col-md-6">
                     <img id="user-icon" class="img-fluid rounded mb-5 mx-auto d-none d-md-block" src="images/user-icon.png" alt="Default user icon">
                     <p><span class="float-left">Biography</span><br></p>
-                    <p id="bio-section" class="pl-1">{{ @SESSION.bio }}</p>
+                    <div id="bio-section" class="text-center">
+                        <p>{{ @SESSION.bio }}</p>
+                    </div>
                 </div> <!-- end of col that holds user photo and biography -->
             </div> <!-- end of row that holds the user basic profile information -->
             <div class="text-center pt-2">

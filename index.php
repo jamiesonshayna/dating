@@ -4,6 +4,7 @@
  * @version 1.0
  * URL: http://sjamieson.greenriverdev.com/328/dating/index.php
  * Date: January 16, 2020
+ * Last Modified: January 26, 2020
  * Description: This file serves to define a default route. When a user navigates to
  * the route of our directory they will be taken to the view that we have defined as views/home.html
  */
