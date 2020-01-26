@@ -61,5 +61,18 @@ $f3->route('POST /profile', function() {
     echo $view->render('views/profile.html');
 });
 
+// define a route that will take the user to the third screen of create a profile
+// this will be the user profile page for interests
+$f3->route('POST /interests', function() {
+    // save user information in our session
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['state'] = $_POST['state'];
+    $_SESSION['seeking'] = $_POST['seeking'];
+    $_SESSION['bio'] = $_POST['bio'];
+
+    $view = new Template();
+    echo $view->render('views/interests.html');
+});
+
 // fun Fat-Free
 $f3->run();
