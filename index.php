@@ -18,7 +18,6 @@ error_reporting(E_ALL);
 
 require("vendor/autoload.php");
 require_once("models/validation.php");
-require_once("models/error-display.js");
 
 // instantiate F3
 $f3 = Base::instance(); // invoke static
@@ -38,7 +37,7 @@ $f3->route('GET /', function() {
 // this will be the first screen the user sees after they click 'create a profile'
 $f3->route('GET /personal-information', function() {
     $view = new Template();
-    echo $view->render('views/personal-information.html');
+    echo $view->render('views/personal-information.php');
 });
 
 // define a route that will take the user to the second screen of create a profile

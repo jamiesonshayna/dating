@@ -21,6 +21,12 @@ Description: This file serves as our style sheet for the existing pages on the d
     font-size: large;
 }
 
+/* style for inline error validation */
+.error {
+    color: red;
+    display: block;
+}
+
 /* styling for home page title */
 #homepage-title {
     overflow: hidden;
@@ -77,5 +83,10 @@ Description: This file serves as our style sheet for the existing pages on the d
 #user-icon {
     width: 50%;
     height: auto;
+}
+
+/* style for valid user input */
+.valid {
+    display: none;
 }
 

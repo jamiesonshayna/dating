@@ -7,18 +7,36 @@ Created: January 25, 2020
 Last Modified: February 09, 2020
 Description: This file will serve to validate user input in the form. We will
 be validating the name, age, phone, email, and interests user selections. If the
-user inputs an invalid input then we want to display an inline error message.
+user inputs an invalid input then we want to display an inline error message. Here we are
+checking if the specific field being validated has been called via AJAX. We return true or
+false depending on if valid and the javascript file takes care of the inline validation.
  */
 
-/* Validate name
+ini_set('display_errors', '1');
+ini_set('error_reporting', E_ALL);
+
+/* Validate first name
  *
  * @param String name
  * @return boolean
  */
-function validName($name) {
-    $tempName = trim($name); // trim whitespace
+if(isset($_POST['firstName'])) {
+    $tempName = $_POST['firstName'];
     // check for empty field or non-alphabetic
-    return !empty($tempName) && isAlpha($tempName);
+    $isValid = !ctype_space($tempName) && !empty($tempName) && isAlpha($tempName);
+    echo json_encode($isValid);
+}
+
+/* Validate last name
+ *
+ * @param String name
+ * @return boolean
+ */
+if(isset($_POST['lastName'])) {
+    $tempName = $_POST['lastName'];
+    // check for empty field or non-alphabetic
+    $isValid = !ctype_space($tempName) && !empty($tempName) && isAlpha($tempName);
+    echo json_encode($isValid);
 }
 
 /* Validate age
@@ -26,27 +44,27 @@ function validName($name) {
  * @param String age
  * @return boolean
  */
-function validAge($age) {
+if(isset($_POST['userAge'])) {
+    $tempAge = $_POST['userAge'];
+
     // check for empty field, number type, and correct age range
-    return !empty($age) && ctype_digit($age) && $age >= 18 && $age <= 118;
+    $isValid = !empty($tempAge) && ctype_digit($tempAge) && ((int)$tempAge >= 18 && (int)$tempAge <= 118);
+    echo json_encode($isValid);
 }
+
 
 /* Validate phone
  *
  * @param String phone
  * @return boolean
  */
-function validPhone($phone) {
-    // trim phone number for any whitespace or added characters
-    $tempPhone = trim($phone);
-    $trimArray = [" ", "-", ".", "(", ")"];
-    for($i = 0; $i < sizeof($trimArray); $i++) {
-        $tempPhone = ltrim($tempPhone, $trimArray[$i]);
-    }
+if(isset($_POST['userPhone'])) {
+    $tempPhone = $_POST['userPhone'];
 
     // check for empty string, number type, and either with area code or full phone
-    return !empty($tempPhone) && ctype_digit($tempPhone) &&
+    $isValid = !ctype_space($tempPhone) && !empty($tempPhone) && ctype_digit($tempPhone) &&
         (strlen($tempPhone) == 7 || strlen($tempPhone) == 10);
+    echo json_encode($isValid);
 }
 
 /* Validate email
@@ -54,22 +72,27 @@ function validPhone($phone) {
  * @param String email
  * @return boolean
  */
-function validEmail($email) {
-    $tempEmail = trim($email);
+if(isset($_POST['userEmail'])) {
+    $tempEmail = $_POST['userEmail'];
     // validate email with PHP function
-    return filter_var($tempEmail, FILTER_VALIDATE_EMAIL);
+    $isValid = filter_var($tempEmail, FILTER_VALIDATE_EMAIL);
+    echo json_encode($isValid);
 }
 
-/* Validate indoor and outdoor interests
+/* Validate ALL interests
  *
- * @param Array indoor/outdoor interests
- * @param Array valid indoor/outdoor interests
+ * @param Array of interests
+ * @param Array valid interests
  * @return boolean
  */
-function validInterests($validArray, $userInterests) {
-    for($i = 0; $i < sizeof($userInterests); $i++) {
-        if(!in_array($userInterests[$i], $validArray)) {
-            return false;
+if(isset($_POST['userInterests'])) {
+    $interests = $_POST['userInterests'];
+
+    // loop through checking against valid interests array
+    $validArray = $_POST['validInterests'];
+    for($i = 0; $i < sizeof($interests); $i++) {
+        if(!in_array($interests[$i], $validArray)) {
+            echo json_encode("false");
         }
-    } return true;
+    } echo json_encode("true");
 }

@@ -16,18 +16,18 @@ accepts user information such as name, age, gender, and phone number. It posts t
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="first-name" class="font-weight-bold"><span class="required">*</span> First Name</label>
-                            <input type="text" class="form-control" id="first-name" name="first-name" aria-describedby="first-name">
-                            <span class="error d-none">invalid first name</span>
+                            <input type="text" class="form-control" id="first-name" name="fName" aria-describedby="first-name">
+                            <span id="error-first" class="d-none">invalid first name</span>
                         </div>
                         <div class="form-group">
                             <label for="last-name" class="font-weight-bold"><span class="required">*</span> Last Name</label>
                             <input type="text" class="form-control" id="last-name" name="last-name" aria-describedby="last-name">
-                            <span class="error d-none">invalid last name</span>
+                            <span id="error-last" class="d-none">invalid last name</span>
                         </div>
                         <div class="form-group">
                             <label for="age" class="font-weight-bold"><span class="required">*</span> Age</label>
                             <input type="text" class="form-control" id="age" name="age" aria-describedby="age" placeholder="">
-                            <span class="error d-none">invalid age</span>
+                            <span id="error-age" class="d-none">invalid age</span>
                         </div>
                         <div class="form-group">
                             <label for="gender-male" class="font-weight-bold">Gender</label><br>
@@ -43,7 +43,7 @@ accepts user information such as name, age, gender, and phone number. It posts t
                         <div class="form-group">
                             <label for="phone" class="font-weight-bold"><span class="required">*</span> Phone Number</label>
                             <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phone" placeholder="">
-                            <span class="error d-none">invalid phone number</span>
+                            <span id="error-phone" class="d-none">invalid phone number</span>
                         </div>
                     </div> <!-- end of user input area (column)-->
                     <div id="privacy" class="col-md-4 pt-2 text-center">
