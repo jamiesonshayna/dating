@@ -3,7 +3,7 @@
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/styles/styles.css
 Created: January 16, 2020
-Last Modified: January 26, 2020
+Last Modified: February 09, 2020
 Description: This file serves as our style sheet for the existing pages on the dating website.
 */
 
@@ -37,6 +37,11 @@ Description: This file serves as our style sheet for the existing pages on the d
 /* style to get privacy section aligned with first name field */
 #privacy {
     margin-top: 24px;
+}
+
+/* style for the required symbol on form fields */
+.required {
+    color: red;
 }
 
 /* styling for home page image */

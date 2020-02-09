@@ -17,6 +17,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require("vendor/autoload.php");
+require_once("models/validation.php");
+require_once("models/error-display.js");
 
 // instantiate F3
 $f3 = Base::instance(); // invoke static
