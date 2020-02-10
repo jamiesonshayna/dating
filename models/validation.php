@@ -12,19 +12,24 @@ checking if the specific field being validated has been called via AJAX. We retu
 false depending on if valid and the javascript file takes care of the inline validation.
  */
 
-ini_set('display_errors', '1');
-ini_set('error_reporting', E_ALL);
-
 /* Validate first name
  *
  * @param String name
  * @return boolean
  */
+// inline validation with AJAX
 if(isset($_POST['firstName'])) {
     $tempName = $_POST['firstName'];
     // check for empty field or non-alphabetic
-    $isValid = !ctype_space($tempName) && !empty($tempName) && isAlpha($tempName);
+    $isValid = !ctype_space($tempName) && !empty($tempName) && ctype_alpha($tempName);
+
     echo json_encode($isValid);
+}
+
+// index.php validation on POST
+function validFirstName($name) {
+    // check for empty field or non-alphabetic
+    return !ctype_space($name) && !empty($name) && ctype_alpha($name);
 }
 
 /* Validate last name
@@ -32,11 +37,20 @@ if(isset($_POST['firstName'])) {
  * @param String name
  * @return boolean
  */
+// inline validation with AJAX
 if(isset($_POST['lastName'])) {
     $tempName = $_POST['lastName'];
     // check for empty field or non-alphabetic
-    $isValid = !ctype_space($tempName) && !empty($tempName) && isAlpha($tempName);
+    $isValid = !ctype_space($tempName) && !empty($tempName) && ctype_alpha($tempName);
+
+    $_SESSION['validLastName'] = $isValid;
     echo json_encode($isValid);
+}
+
+// index.php validation on POST
+function validLastName($name) {
+    // check for empty field or non-alphabetic
+    return !ctype_space($name) && !empty($name) && ctype_alpha($name);
 }
 
 /* Validate age
@@ -44,12 +58,20 @@ if(isset($_POST['lastName'])) {
  * @param String age
  * @return boolean
  */
+// inline validation with AJAX
 if(isset($_POST['userAge'])) {
     $tempAge = $_POST['userAge'];
 
     // check for empty field, number type, and correct age range
     $isValid = !empty($tempAge) && ctype_digit($tempAge) && ((int)$tempAge >= 18 && (int)$tempAge <= 118);
+
     echo json_encode($isValid);
+}
+
+// index.php validation on POST
+function validAge($age) {
+    // check for empty field, number type, and correct age range
+    return !empty($age) && ctype_digit($age) && ((int)$age >= 18 && (int)$age <= 118);
 }
 
 
@@ -58,13 +80,22 @@ if(isset($_POST['userAge'])) {
  * @param String phone
  * @return boolean
  */
+// inline validation with AJAX
 if(isset($_POST['userPhone'])) {
     $tempPhone = $_POST['userPhone'];
 
     // check for empty string, number type, and either with area code or full phone
     $isValid = !ctype_space($tempPhone) && !empty($tempPhone) && ctype_digit($tempPhone) &&
         (strlen($tempPhone) == 7 || strlen($tempPhone) == 10);
+
     echo json_encode($isValid);
+}
+
+// index.php validation on POST
+function validPhone($phone) {
+    // check for empty string, number type, and either with area code or full phone
+    return !ctype_space($phone) && !empty($phone) && ctype_digit($phone) &&
+        (strlen($phone) == 7 || strlen($phone) == 10);
 }
 
 /* Validate email
@@ -76,6 +107,8 @@ if(isset($_POST['userEmail'])) {
     $tempEmail = $_POST['userEmail'];
     // validate email with PHP function
     $isValid = filter_var($tempEmail, FILTER_VALIDATE_EMAIL);
+
+    $_SESSION['validEmail'] = $isValid;
     echo json_encode($isValid);
 }
 
@@ -88,11 +121,17 @@ if(isset($_POST['userEmail'])) {
 if(isset($_POST['userInterests'])) {
     $interests = $_POST['userInterests'];
 
+    $isValid = true;
+
     // loop through checking against valid interests array
     $validArray = $_POST['validInterests'];
     for($i = 0; $i < sizeof($interests); $i++) {
         if(!in_array($interests[$i], $validArray)) {
-            echo json_encode("false");
+            $isValid = false;
+            break;
         }
-    } echo json_encode("true");
+    }
+
+    $_SESSION['validInterests']= $isValid;
+    echo json_encode($isValid);
 }

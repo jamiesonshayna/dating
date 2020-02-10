@@ -22,7 +22,7 @@ Description: This file serves as our style sheet for the existing pages on the d
 }
 
 /* style for inline error validation */
-.error {
+.error, .error-post {
     color: red;
     display: block;
 }

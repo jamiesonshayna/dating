@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
     // validate the first name with PHP file and provide inline validation
     $("#first-name").on("blur", function() {
@@ -10,12 +11,17 @@ $(document).ready(function() {
             },
             success: function (response) {
                 let errorSpan = $('#error-first');
+                let errorSpan2 = $('#error-first-name');
                 if(response === "false") {
                     errorSpan.removeClass();
                     errorSpan.addClass('error');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 } else {
                     errorSpan.removeClass();
                     errorSpan.addClass('valid');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 }
             }
         });
@@ -32,12 +38,17 @@ $(document).ready(function() {
             },
             success: function (response) {
                 let errorSpan = $('#error-last');
+                let errorSpan2 = $('#error-last-name');
                 if(response === "false") {
                     errorSpan.removeClass();
                     errorSpan.addClass('error');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 } else {
                     errorSpan.removeClass();
                     errorSpan.addClass('valid');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 }
             }
         });
@@ -54,12 +65,17 @@ $(document).ready(function() {
             },
             success: function (response) {
                 let errorSpan = $('#error-age');
+                let errorSpan2 = $('#error-user-age');
                 if(response === "false") {
                     errorSpan.removeClass();
                     errorSpan.addClass('error');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 } else {
                     errorSpan.removeClass();
                     errorSpan.addClass('valid');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 }
             }
         });
@@ -76,12 +92,17 @@ $(document).ready(function() {
             },
             success: function (response) {
                 let errorSpan = $('#error-phone');
+                let errorSpan2 = $('#error-user-phone');
                 if(response === "false") {
                     errorSpan.removeClass();
                     errorSpan.addClass('error');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 } else {
                     errorSpan.removeClass();
                     errorSpan.addClass('valid');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 }
             }
         });
@@ -116,19 +137,11 @@ $(document).ready(function() {
         let interestsArray = [];
 
         let tempArray = document.getElementsByName("interests[]");
-        for(var i = 0; i < tempArray.length; i++) {
+        for(let i = 0; i < tempArray.length; i++) {
             if(tempArray[i].checked) {
-                console.log(tempArray[i].value);
+                interestsArray.push(tempArray[i].value);
             }
         }
-
-        // // loop through all of our interests to get values
-        // $('input:checkbox[name=interests]:checked').each(function() {
-        //     console.log($(this).val());
-        //     interestsArray.push($(this).value);
-        // });
-
-        console.log(interestsArray.toString());
 
         $.ajax({
             url: 'models/validation.php',

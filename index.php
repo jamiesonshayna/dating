@@ -17,7 +17,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require("vendor/autoload.php");
-require_once("models/validation.php");
+require("models/validation.php");
 
 // instantiate F3
 $f3 = Base::instance(); // invoke static
@@ -33,22 +33,71 @@ $f3->route('GET /', function() {
     echo $view->render('views/home.html');
 });
 
+// keep track of form 1s valid state on POST
+$validForm1 = true;
+
 // define a route that will take the user to the create a profile form
 // this will be the first screen the user sees after they click 'create a profile'
-$f3->route('GET /personal-information', function() {
+$f3->route('GET|POST /personal-information', function($f3, $validForm1) {
+    // if we are checking our data from post
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // validate for first name
+        $first = $_POST['fName'];
+        if(validFirstName($first)) {
+            $f3->set('fName', $first);
+            $_SESSION['first-Name'] = $first;
+        } else {
+            $f3->set("errors['first-name']","invalid first name");
+            $validForm1 = false;
+        }
+
+        // validate for last name
+        $last = $_POST['last-name'];
+        if(validLastName($last)) {
+            $f3->set('lName', $last);
+            $_SESSION['last-Name'] = $last;
+        } else {
+            $f3->set("errors['last-name']","invalid last name");
+            $validForm1 = false;
+        }
+
+        // validate for age
+        $age = $_POST['age'];
+        if(validAge($age)) {
+            $f3->set('userAge', $age);
+            $_SESSION['userAge'] = $age;
+        } else {
+            $f3->set("errors['age']","invalid age");
+            $validForm1 = false;
+        }
+
+        // validate for phone
+        $phone = $_POST['phone'];
+        if(validPhone($phone)) {
+            $f3->set('userPhone', $phone);
+            $_SESSION['userPhone'] = $phone;
+        } else {
+            $f3->set("errors['phone']","invalid phone number");
+            $validForm1 = false;
+        }
+
+        // set non-required attributes
+        $gender = $_POST['gender'];
+        $f3->set('userGender', $gender);
+        $_SESSION['userGender'] = $gender;
+
+        // ALL REQUIRED FORM FIELDS ARE VALID
+        if($validForm1) {
+            $f3->reroute('/profile');
+        }
+    }
     $view = new Template();
     echo $view->render('views/personal-information.php');
 });
 
 // define a route that will take the user to the second screen of create a profile
 // this will be the user profile page for email, state, seeking, and a biography.
-$f3->route('POST /profile', function() {
-    // save user information in our session
-    $_SESSION['first'] = $_POST['first-name'];
-    $_SESSION['last'] = $_POST['last-name'];
-    $_SESSION['age'] = $_POST['age'];
-    $_SESSION['gender'] = $_POST['gender'];
-    $_SESSION['phone'] = $_POST['phone'];
+$f3->route('GET|POST /profile', function() {
 
     $view = new Template();
     echo $view->render('views/profile.html');
