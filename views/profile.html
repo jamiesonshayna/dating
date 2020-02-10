@@ -3,21 +3,26 @@
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/views/profile.html
 Created: January 25, 2020
-Last Modified: January 26, 2020
+Last Modified: February 9, 2020
 Description: This file serves as second screen of the user's profile registration process. It
 accepts user information such as email, state, seeking, and bio. It posts to the next form (interests).
+There is not as much area for code reduction here other than placing the header and footer in included files.
+Much of this page is build with custom input areas.
 -->
 <include href="views/header-with-nav.html">
     <div class="container card mt-3">
         <div class="card-body">
             <h1 class="toast-header text-dark">Profile</h1>
-            <form method="post" action="interests">
+            <form method="post" action="#">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="email" class="font-weight-bold"><span class="required">*</span> Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" aria-describedby="email" placeholder="">
+                            <input type="text" class="form-control" id="email" name="email" aria-describedby="email" value="{{ @userEmail }}">
                             <span id="error-email" class="d-none">invalid email address</span>
+                            <check if="{{isset(@errors['email'])}}">
+                                <p id="error-user-email" class="error-post"> {{@errors['email']}}</p>
+                            </check>
                         </div>
                         <div class="form-group">
                             <label for="state" class="font-weight-bold">State</label>
@@ -28,11 +33,17 @@ accepts user information such as email, state, seeking, and bio. It posts to the
                         <div class="form-group">
                             <label for="seeking-male" class="font-weight-bold">Seeking</label><br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="seeking" id="seeking-male" value="Male">
+                                <input class="form-check-input" type="radio" name="seeking" id="seeking-male" value="Male"
+                                <check if="{{ @userSeeking == Male }}">
+                                    checked="checked"
+                                </check>>
                                 <label class="form-check-label pl-1" for="seeking-male">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="seeking" id="seeking-female" value="Female">
+                                <input class="form-check-input" type="radio" name="seeking" id="seeking-female" value="Female"
+                                <check if="{{ @userSeeking == Female }}">
+                                    checked="checked"
+                                </check>>
                                 <label class="form-check-label pl-1" for="seeking-female">Female</label>
                             </div>
                         </div>
@@ -40,7 +51,7 @@ accepts user information such as email, state, seeking, and bio. It posts to the
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="bio" class="font-weight-bold">Biography</label>
-                            <textarea class="form-control" id="bio" name="bio" aria-describedby="bio" rows="5" placeholder=""></textarea>
+                            <textarea class="form-control" id="bio" name="bio" aria-describedby="bio" rows="5">{{ @userBio }}</textarea>
                         </div>
                     </div> <!-- end of row that holds the user's bio -->
                 </div> <!-- end of row that holds form input areas -->

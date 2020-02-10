@@ -43,8 +43,8 @@ $f3->route('GET|POST /personal-information', function($f3, $validForm1) {
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         // validate for first name
         $first = $_POST['fName'];
+        $f3->set('fName', $first);
         if(validFirstName($first)) {
-            $f3->set('fName', $first);
             $_SESSION['first-Name'] = $first;
         } else {
             $f3->set("errors['first-name']","invalid first name");
@@ -53,8 +53,8 @@ $f3->route('GET|POST /personal-information', function($f3, $validForm1) {
 
         // validate for last name
         $last = $_POST['last-name'];
+        $f3->set('lName', $last);
         if(validLastName($last)) {
-            $f3->set('lName', $last);
             $_SESSION['last-Name'] = $last;
         } else {
             $f3->set("errors['last-name']","invalid last name");
@@ -63,8 +63,8 @@ $f3->route('GET|POST /personal-information', function($f3, $validForm1) {
 
         // validate for age
         $age = $_POST['age'];
+        $f3->set('userAge', $age);
         if(validAge($age)) {
-            $f3->set('userAge', $age);
             $_SESSION['userAge'] = $age;
         } else {
             $f3->set("errors['age']","invalid age");
@@ -73,8 +73,8 @@ $f3->route('GET|POST /personal-information', function($f3, $validForm1) {
 
         // validate for phone
         $phone = $_POST['phone'];
+        $f3->set('userPhone', $phone);
         if(validPhone($phone)) {
-            $f3->set('userPhone', $phone);
             $_SESSION['userPhone'] = $phone;
         } else {
             $f3->set("errors['phone']","invalid phone number");
@@ -95,23 +95,79 @@ $f3->route('GET|POST /personal-information', function($f3, $validForm1) {
     echo $view->render('views/personal-information.php');
 });
 
+// keep track of valid form 2 on POST
+$validForm2 = true;
+
 // define a route that will take the user to the second screen of create a profile
 // this will be the user profile page for email, state, seeking, and a biography.
-$f3->route('GET|POST /profile', function() {
+$f3->route('GET|POST /profile', function($f3, $validForm2) {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // validate email
+        $email = $_POST['email'];
+        $f3->set('userEmail', $email);
+        if(validEmail($email)) {
+            $_SESSION['user-email'] = $email;
+        } else {
+            $f3->set("errors['email']","invalid email address");
+            $validForm2 = false;
+        }
+
+        // set non-required attributes
+        $state = $_POST['state'];
+        $f3->set('userState', $state);
+        $_SESSION['userState'] = $state;
+
+        $seeking = $_POST['seeking'];
+        $f3->set('userSeeking', $seeking);
+        $_SESSION['userSeeking'] = $seeking;
+
+        $bio = $_POST['bio'];
+        $f3->set('userBio', $bio);
+        $_SESSION['userBio'] = $bio;
+
+        // ALL REQUIRED FORM FIELDS ARE VALID
+        if($validForm2) {
+            $f3->reroute('/interests');
+        }
+    }
 
     $view = new Template();
     echo $view->render('views/profile.html');
 });
 
+// valid interests array
+$validInterests = array("tv", "puzzles", "movies", "reading", "cooking", "playing cards", "board games",
+    "video games", "hiking", "walking", "biking", "climbing", "swimming", "collecting");
+
+// keep track of valid form 3 on POST
+$validForm3 = true;
+
 // define a route that will take the user to the third screen of create a profile
 // this will be the user profile page for interests
-$f3->route('POST /interests', function() {
-    // save user information in our session
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['state'] = $_POST['state'];
-    $_SESSION['seeking'] = $_POST['seeking'];
-    $_SESSION['bio'] = $_POST['bio'];
+$f3->route('GET|POST /interests', function($f3, $validForm3) {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // validate interests
+        $interests = $_POST['interests'];
+        $interestsText = "";
 
+        if(validInterests($interests)) {
+            if(is_array($_POST['interests'])) {
+                foreach($_POST['interests'] as $value) {
+                    $interestsText .= $value . " ";
+                }
+            }
+
+            $f3->set('userInterests', $interestsText);
+            $_SESSION['userInterests'] = $interestsText;
+        } else {
+            $f3->set("errors['interests']","invalid interests");
+            $validForm3 = false;
+        }
+        // ALL REQUIRED FORM FIELDS ARE VALID
+        if($validForm3) {
+            $f3->reroute('/summary');
+        }
+    }
     $view = new Template();
     echo $view->render('views/interests.html');
 });

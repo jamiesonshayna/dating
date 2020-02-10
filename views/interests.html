@@ -119,6 +119,9 @@ accepts user information for their indoor and outdoor interests.
                     </div> <!-- end of column with collecting checkboxes -->
                 </div> <!-- end of row with outdoor interests selections -->
                 <span id="error-interests" class="d-none">invalid interests</span>
+                <check if="{{isset(@errors['interests'])}}">
+                    <p id="error-user-interests" class="error-post"> {{@errors['interests']}}</p>
+                </check>
                 <div class="text-center">
                     <button id="submit-interests" type="submit" class="btn-sm btn-dark float-right">Next ></button>
                 </div>

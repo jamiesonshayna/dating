@@ -103,13 +103,19 @@ function validPhone($phone) {
  * @param String email
  * @return boolean
  */
+// inline validation with AJAX
 if(isset($_POST['userEmail'])) {
     $tempEmail = $_POST['userEmail'];
     // validate email with PHP function
     $isValid = filter_var($tempEmail, FILTER_VALIDATE_EMAIL);
 
-    $_SESSION['validEmail'] = $isValid;
     echo json_encode($isValid);
+}
+
+// index.php validation on POST
+function validEmail($email) {
+    // validate email with PHP function
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
 /* Validate ALL interests
@@ -118,6 +124,7 @@ if(isset($_POST['userEmail'])) {
  * @param Array valid interests
  * @return boolean
  */
+// inline validation with AJAX
 if(isset($_POST['userInterests'])) {
     $interests = $_POST['userInterests'];
 
@@ -132,6 +139,20 @@ if(isset($_POST['userInterests'])) {
         }
     }
 
-    $_SESSION['validInterests']= $isValid;
     echo json_encode($isValid);
+}
+
+// index.php validation on POST
+function validInterests($interests) {
+    $isValid = true;
+
+    global $validInterests;
+    for($i = 0; $i < sizeof($interests); $i++) {
+        if(!in_array($interests[$i], $validInterests)) {
+            $isValid = false;
+            break;
+        }
+    }
+
+    return $isValid;
 }

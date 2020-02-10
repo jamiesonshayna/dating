@@ -119,12 +119,17 @@ $(document).ready(function() {
             },
             success: function (response) {
                 let errorSpan = $('#error-email');
+                let errorSpan2 = $('#error-user-email');
                 if(response === "false") {
                     errorSpan.removeClass();
                     errorSpan.addClass('error');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 } else {
                     errorSpan.removeClass();
                     errorSpan.addClass('valid');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 }
             }
         });
@@ -153,12 +158,17 @@ $(document).ready(function() {
             success: function (response) {
                 console.log(response);
                 let errorSpan = $('#error-interests');
+                let errorSpan2 = $('#error-user-interests');
                 if(response === "false") {
                     errorSpan.removeClass();
                     errorSpan.addClass('error');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 } else {
                     errorSpan.removeClass();
                     errorSpan.addClass('valid');
+                    errorSpan2.removeClass();
+                    errorSpan2.addClass('valid');
                 }
             }
         });
