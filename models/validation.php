@@ -138,21 +138,18 @@ if(isset($_POST['userInterests'])) {
             break;
         }
     }
-
     echo json_encode($isValid);
 }
 
 // index.php validation on POST
-function validInterests($interests) {
+function validInterests($interests, $validArray) {
     $isValid = true;
 
-    global $validInterests;
     for($i = 0; $i < sizeof($interests); $i++) {
-        if(!in_array($interests[$i], $validInterests)) {
+        if(!in_array($interests[$i], $validArray)) {
             $isValid = false;
             break;
         }
     }
-
     return $isValid;
 }

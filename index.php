@@ -45,7 +45,7 @@ $f3->route('GET|POST /personal-information', function($f3, $validForm1) {
         $first = $_POST['fName'];
         $f3->set('fName', $first);
         if(validFirstName($first)) {
-            $_SESSION['first-Name'] = $first;
+            $_SESSION['firstName'] = $first;
         } else {
             $f3->set("errors['first-name']","invalid first name");
             $validForm1 = false;
@@ -55,7 +55,7 @@ $f3->route('GET|POST /personal-information', function($f3, $validForm1) {
         $last = $_POST['last-name'];
         $f3->set('lName', $last);
         if(validLastName($last)) {
-            $_SESSION['last-Name'] = $last;
+            $_SESSION['lastName'] = $last;
         } else {
             $f3->set("errors['last-name']","invalid last name");
             $validForm1 = false;
@@ -106,7 +106,7 @@ $f3->route('GET|POST /profile', function($f3, $validForm2) {
         $email = $_POST['email'];
         $f3->set('userEmail', $email);
         if(validEmail($email)) {
-            $_SESSION['user-email'] = $email;
+            $_SESSION['userEmail'] = $email;
         } else {
             $f3->set("errors['email']","invalid email address");
             $validForm2 = false;
@@ -142,6 +142,8 @@ $validInterests = array("tv", "puzzles", "movies", "reading", "cooking", "playin
 // keep track of valid form 3 on POST
 $validForm3 = true;
 
+$displayInterests = array();
+
 // define a route that will take the user to the third screen of create a profile
 // this will be the user profile page for interests
 $f3->route('GET|POST /interests', function($f3, $validForm3) {
@@ -150,7 +152,10 @@ $f3->route('GET|POST /interests', function($f3, $validForm3) {
         $interests = $_POST['interests'];
         $interestsText = "";
 
-        if(validInterests($interests)) {
+
+        global $validInterests;
+        $f3->set('interestSticky', $interests);
+        if(validInterests($interests, $validInterests)) {
             if(is_array($_POST['interests'])) {
                 foreach($_POST['interests'] as $value) {
                     $interestsText .= $value . " ";
@@ -160,7 +165,7 @@ $f3->route('GET|POST /interests', function($f3, $validForm3) {
             $f3->set('userInterests', $interestsText);
             $_SESSION['userInterests'] = $interestsText;
         } else {
-            $f3->set("errors['interests']","invalid interests");
+            $f3->set("errors['interests']","invalid interests, please submit again");
             $validForm3 = false;
         }
         // ALL REQUIRED FORM FIELDS ARE VALID
@@ -174,19 +179,7 @@ $f3->route('GET|POST /interests', function($f3, $validForm3) {
 
 // define a route that will take the user to the summary screen of create a profile
 // this page will display the users form fields that were filled out
-$f3->route('POST /summary', function() {
-    // loop through our interests POST arrays to make an interests String
-    $interests = "";
-
-    if(is_array($_POST['interests'])) {
-        foreach($_POST['interests'] as $value) {
-            $interests .= $value . " ";
-        }
-    }
-
-    // save all interests in our session to be displayed in summary
-    $_SESSION['interests'] = $interests;
-
+$f3->route('GET|POST /summary', function() {
     $view = new Template();
     echo $view->render('views/summary.html');
 });

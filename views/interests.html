@@ -3,26 +3,34 @@
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/views/interests.html
 Created: January 25, 2020
-Last Modified: January 26, 2020
+Last Modified: February 9, 2020
 Description: This file serves as third screen of the user's profile registration process. It
 accepts user information for their indoor and outdoor interests.
+There is not as much area for code reduction here other than placing the header and footer in included files.
+Much of this page is build with custom input areas.
 -->
 <include href="views/header-with-nav.html">
     <div class="container card mt-3">
         <div class="card-body">
             <h1 id="interests-header" class="toast-header text-dark">Interests</h1>
-            <form method="post" action="summary">
+            <form method="post" action="#">
                 <label for="tv" class="font-weight-bold">In-door Interests</label><br>
                 <div class="row pl-2">
                     <div class="col-md-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="tv" id="tv">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="tv" id="tv"
+                            <check if="{{ isset(@interestSticky) && in_array(tv, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="tv">
                                 tv
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="puzzles" id="puzzles">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="puzzles" id="puzzles"
+                            <check if="{{ isset(@interestSticky) && in_array(puzzles, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="puzzles">
                                 puzzles
                             </label>
@@ -30,13 +38,19 @@ accepts user information for their indoor and outdoor interests.
                     </div> <!-- end of column with tv and puzzles checkboxes -->
                     <div class="col-md-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="movies" id="movies">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="movies" id="movies"
+                            <check if="{{ isset(@interestSticky) && in_array(movies, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="movies">
                                 movies
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="reading" id="reading">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="reading" id="reading"
+                            <check if="{{ isset(@interestSticky) && in_array(reading, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="reading">
                                 reading
                             </label>
@@ -44,13 +58,19 @@ accepts user information for their indoor and outdoor interests.
                     </div> <!-- end of column with movies and reading checkboxes -->
                     <div class="col-md-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="cooking" id="cooking">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="cooking" id="cooking"
+                            <check if="{{ isset(@interestSticky) && in_array(cooking, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="cooking">
                                 cooking
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="playing cards" id="playing-cards">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="playing cards" id="playing-cards"
+                            <check if="{{ isset(@interestSticky) && in_array('playing cards', @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="playing-cards">
                                 playing cards
                             </label>
@@ -58,13 +78,19 @@ accepts user information for their indoor and outdoor interests.
                     </div> <!-- end of column with cooking and playing cards checkboxes -->
                     <div class="col-md-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="board games" id="board-games">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="board games" id="board-games"
+                            <check if="{{ isset(@interestSticky) && in_array('board games', @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="board-games">
                                 board games
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="video games" id="video-games">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="video games" id="video-games"
+                            <check if="{{ isset(@interestSticky) && in_array('video games', @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="video-games">
                                 video games
                             </label>
@@ -75,13 +101,19 @@ accepts user information for their indoor and outdoor interests.
                 <div class="row pl-2">
                     <div class="col-md-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="hiking" id="hiking">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="hiking" id="hiking"
+                            <check if="{{ isset(@interestSticky) && in_array(hiking, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="hiking">
                                 hiking
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="walking" id="walking">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="walking" id="walking"
+                            <check if="{{ isset(@interestSticky) && in_array(walking, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="walking">
                                 walking
                             </label>
@@ -89,13 +121,19 @@ accepts user information for their indoor and outdoor interests.
                     </div> <!-- end of column with hiking and walking checkboxes -->
                     <div class="col-md-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="biking" id="biking">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="biking" id="biking"
+                            <check if="{{ isset(@interestSticky) && in_array(biking, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="biking">
                                 biking
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="climbing" id="climbing">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="climbing" id="climbing"
+                            <check if="{{ isset(@interestSticky) && in_array(climbing, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="climbing">
                                 climbing
                             </label>
@@ -103,7 +141,10 @@ accepts user information for their indoor and outdoor interests.
                     </div> <!-- end of column with biking and climbing checkboxes -->
                     <div class="col-md-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="swimming" id="swimming">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="swimming" id="swimming"
+                            <check if="{{ isset(@interestSticky) && in_array(swimming, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="swimming">
                                 swimming
                             </label>
@@ -111,16 +152,19 @@ accepts user information for their indoor and outdoor interests.
                     </div> <!-- end of column with swimming checkboxes -->
                     <div class="col-md-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="interests[]" value="collecting" id="collecting">
+                            <input class="form-check-input" type="checkbox" name="interests[]" value="collecting" id="collecting"
+                            <check if="{{ isset(@interestSticky) && in_array(collecting, @interestSticky) }}">
+                                checked="checked"
+                            </check>>
                             <label class="form-check-label" for="collecting">
                                 collecting
                             </label>
                         </div>
                     </div> <!-- end of column with collecting checkboxes -->
                 </div> <!-- end of row with outdoor interests selections -->
-                <span id="error-interests" class="d-none">invalid interests</span>
+                <span id="error-interests" class="d-none">invalid interests, please submit again</span>
                 <check if="{{isset(@errors['interests'])}}">
-                    <p id="error-user-interests" class="error-post"> {{@errors['interests']}}</p>
+                    <p id="error-user-interests" class="error-post">{{@errors['interests']}}</p>
                 </check>
                 <div class="text-center">
                     <button id="submit-interests" type="submit" class="btn-sm btn-dark float-right">Next ></button>

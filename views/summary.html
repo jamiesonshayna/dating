@@ -3,7 +3,7 @@
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/views/summary.html
 Created: January 26, 2020
-Last Modified: January 26, 2020
+Last Modified: February 9, 2020
 Description: This file serves as the last screen of the user sign-up screens. It is a summary
 page that will display all of the user information that is collected in sessions.
 -->
@@ -14,14 +14,14 @@ page that will display all of the user information that is collected in sessions
                 <div class="col-md-6 pb-2">
                     <div class="card">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Name: {{ @SESSION.first }} {{ @SESSION.last }}</li>
-                            <li class="list-group-item">Gender: {{ @SESSION.gender }}</li>
-                            <li class="list-group-item">Age: {{ @SESSION.age }}</li>
-                            <li class="list-group-item">Phone: {{ @SESSION.phone }}</li>
-                            <li class="list-group-item">Email: {{ @SESSION.email }}</li>
-                            <li class="list-group-item">State: {{ @SESSION.state }}</li>
-                            <li class="list-group-item">Seeking: {{ @SESSION.seeking }}</li>
-                            <li class="list-group-item">Interests: {{ @SESSION.interests }}</li>
+                            <li class="list-group-item">Name: {{ @SESSION.firstName }} {{ @SESSION.lastName }}</li>
+                            <li class="list-group-item">Gender: {{ @SESSION.userGender }}</li>
+                            <li class="list-group-item">Age: {{ @SESSION.userAge }}</li>
+                            <li class="list-group-item">Phone: {{ @SESSION.userPhone }}</li>
+                            <li class="list-group-item">Email: {{ @SESSION.userEmail }}</li>
+                            <li class="list-group-item">State: {{ @SESSION.userState }}</li>
+                            <li class="list-group-item">Seeking: {{ @SESSION.userSeeking }}</li>
+                            <li class="list-group-item">Interests: {{ @SESSION.userInterests }}</li>
                         </ul>
                     </div>
                 </div> <!-- end of col that holds profile information -->
@@ -29,7 +29,7 @@ page that will display all of the user information that is collected in sessions
                     <img id="user-icon" class="img-fluid rounded mb-5 mx-auto d-none d-md-block" src="images/user-icon.png" alt="Default user icon">
                     <p id="bio-title"><span class="float-left">Biography</span><br></p>
                     <div id="bio-section" class="text-center">
-                        <p>{{ @SESSION.bio }}</p>
+                        <p>{{ @SESSION.userBio }}</p>
                     </div>
                 </div> <!-- end of col that holds user photo and biography -->
             </div> <!-- end of row that holds the user basic profile information -->
