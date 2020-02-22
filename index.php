@@ -14,7 +14,6 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require("vendor/autoload.php");
-require("models/validation.php");
 
 // start a session - ONLY ever need to put this in our controller (all other pages get by transference)
 session_start();
@@ -22,15 +21,14 @@ session_start();
 // instantiate F3
 $f3 = Base::instance(); // invoke static
 
+// create our member controller class object
+$controller = new MemberController($f3);
+
 // define a default route
 // when the user navigates to the route directory of the project
 // this is what they should see
 $f3->route('GET /', function() {
-    // create a new view object by instantiating the fat-free templating class
-    $view = new Template();
-
-    // on the object template we render the home page through this route
-    echo $view->render('views/home.html');
+    $GLOBALS['controller']->home();
 });
 
 // keep track of form 1s valid state on POST
@@ -38,69 +36,8 @@ $validForm1 = true;
 
 // define a route that will take the user to the create a profile form
 // this will be the first screen the user sees after they click 'create a profile'
-$f3->route('GET|POST /personal-information', function($f3, $validForm1) {
-    // if we are checking our data from post
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // validate for first name
-        $first = $_POST['fName'];
-        $f3->set('fName', $first);
-        if(validFirstName($first)) {
-            $_SESSION['firstName'] = $first;
-        } else {
-            $f3->set("errors['first-name']","invalid first name");
-            $validForm1 = false;
-        }
-
-        // validate for last name
-        $last = $_POST['last-name'];
-        $f3->set('lName', $last);
-        if(validLastName($last)) {
-            $_SESSION['lastName'] = $last;
-        } else {
-            $f3->set("errors['last-name']","invalid last name");
-            $validForm1 = false;
-        }
-
-        // validate for age
-        $age = $_POST['age'];
-        $f3->set('userAge', $age);
-        if(validAge($age)) {
-            $_SESSION['userAge'] = $age;
-        } else {
-            $f3->set("errors['age']","invalid age");
-            $validForm1 = false;
-        }
-
-        // validate for phone
-        $phone = $_POST['phone'];
-        $f3->set('userPhone', $phone);
-        if(validPhone($phone)) {
-            $_SESSION['userPhone'] = $phone;
-        } else {
-            $f3->set("errors['phone']","invalid phone number");
-            $validForm1 = false;
-        }
-
-        // set non-required attributes
-        $gender = $_POST['gender'];
-        $f3->set('userGender', $gender);
-        $_SESSION['userGender'] = $gender;
-
-        // ALL REQUIRED FORM FIELDS ARE VALID
-        if($validForm1) {
-            // check whether or not we have a premium member
-            if(isset($_POST["premium"])) {
-                $member = new PremiumMember($first, $last, $age, $gender, $phone);
-                $_SESSION['member'] = $member;
-            } else {
-                $member = new Member($first, $last, $age, $gender, $phone);
-                $_SESSION['member'] = $member;
-            }
-            $f3->reroute('/profile');
-        }
-    }
-    $view = new Template();
-    echo $view->render('views/personal-information.php');
+$f3->route('GET|POST /personal-information', function($validForm1) {
+    $GLOBALS['controller']->personalInformation($validForm1);
 });
 
 // keep track of valid form 2 on POST
@@ -108,55 +45,8 @@ $validForm2 = true;
 
 // define a route that will take the user to the second screen of create a profile
 // this will be the user profile page for email, state, seeking, and a biography.
-$f3->route('GET|POST /profile', function($f3, $validForm2) {
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // validate email
-        $email = $_POST['email'];
-        $f3->set('userEmail', $email);
-        if(validEmail($email)) {
-            $_SESSION['userEmail'] = $email;
-        } else {
-            $f3->set("errors['email']","invalid email address");
-            $validForm2 = false;
-        }
-
-        // set non-required attributes
-        $state = $_POST['state'];
-        $f3->set('userState', $state);
-        $_SESSION['userState'] = $state;
-
-        $seeking = $_POST['seeking'];
-        $f3->set('userSeeking', $seeking);
-        $_SESSION['userSeeking'] = $seeking;
-
-        $bio = $_POST['bio'];
-        $f3->set('userBio', $bio);
-        $_SESSION['userBio'] = $bio;
-
-        // ALL REQUIRED FORM FIELDS ARE VALID
-        if($validForm2) {
-            // retrieve our member object to set new attributes
-            $memberObject = $_SESSION['member'];
-
-            $memberObject->setEmail($email);
-            $memberObject->setState($state);
-            $memberObject->setSeeking($seeking);
-            $memberObject->setBio($bio);
-
-            // reset new member object with new attributes to session
-            $_SESSION['member'] = $memberObject;
-
-            // reroute to summary screen if the user is normal else, go to interests
-            if($memberObject->membershipType() == "normal") {
-                $f3->reroute('/summary');
-            } else {
-                $f3->reroute('/interests');
-            }
-        }
-    }
-
-    $view = new Template();
-    echo $view->render('views/profile.html');
+$f3->route('GET|POST /profile', function($validForm2) {
+    $GLOBALS['controller']->profile($validForm2);
 });
 
 // valid interests array
@@ -166,54 +56,16 @@ $validInterests = array("tv", "puzzles", "movies", "reading", "cooking", "playin
 // keep track of valid form 3 on POST
 $validForm3 = true;
 
-$displayInterests = array();
-
 // define a route that will take the user to the third screen of create a profile
 // this will be the user profile page for interests
-$f3->route('GET|POST /interests', function($f3, $validForm3) {
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // validate interests
-        $interests = $_POST['interests'];
-        $interestsText = "";
-
-
-        global $validInterests;
-        $f3->set('interestSticky', $interests);
-        if(validInterests($interests, $validInterests)) {
-            if(is_array($_POST['interests'])) {
-                foreach($_POST['interests'] as $value) {
-                    $interestsText .= $value . " ";
-                }
-            }
-
-            $f3->set('userInterests', $interestsText);
-            $_SESSION['userInterests'] = $interestsText;
-        } else {
-            $f3->set("errors['interests']","invalid interests, please submit again");
-            $validForm3 = false;
-        }
-        // ALL REQUIRED FORM FIELDS ARE VALID
-        if($validForm3) {
-            // retrieve our member object to set new attributes
-            $memberObject = $_SESSION['member'];
-
-            $memberObject->setInDoorInterests($interestsText);
-
-            // save back into session for member
-            $_SESSION['member'] = $memberObject;
-
-            $f3->reroute('/summary');
-        }
-    }
-    $view = new Template();
-    echo $view->render('views/interests.html');
+$f3->route('GET|POST /interests', function($validForm3) {
+    $GLOBALS['controller']->interests($validForm3);
 });
 
 // define a route that will take the user to the summary screen of create a profile
 // this page will display the users form fields that were filled out
 $f3->route('GET|POST /summary', function() {
-    $view = new Template();
-    echo $view->render('views/summary.html');
+    $GLOBALS['controller']->summary();
 });
 
 // fun Fat-Free

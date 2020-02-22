@@ -13,7 +13,7 @@ $(document).ready(function() {
     $("#first-name").on("blur", function() {
         let first = document.getElementById('first-name').value;
         $.ajax({
-            url: 'models/validation.php',
+            url: 'models/inline-validation.php',
             method: 'post',
             data: {
                 firstName: first
@@ -40,7 +40,7 @@ $(document).ready(function() {
     $("#last-name").on("blur", function() {
         let last = document.getElementById('last-name').value;
         $.ajax({
-            url: 'models/validation.php',
+            url: 'models/inline-validation.php',
             method: 'post',
             data: {
                 lastName: last
@@ -67,7 +67,7 @@ $(document).ready(function() {
     $("#age").on("blur", function() {
         let age = document.getElementById('age').value;
         $.ajax({
-            url: 'models/validation.php',
+            url: 'models/inline-validation.php',
             method: 'post',
             data: {
                 userAge: age
@@ -94,7 +94,7 @@ $(document).ready(function() {
     $("#phone").on("blur", function() {
         let phone = document.getElementById('phone').value;
         $.ajax({
-            url: 'models/validation.php',
+            url: 'models/inline-validation.php',
             method: 'post',
             data: {
                 userPhone: phone
@@ -121,7 +121,7 @@ $(document).ready(function() {
     $("#email").on("blur", function() {
         let email = document.getElementById('email').value;
         $.ajax({
-            url: 'models/validation.php',
+            url: 'models/inline-validation.php',
             method: 'post',
             data: {
                 userEmail: email
@@ -158,7 +158,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'models/validation.php',
+            url: 'models/inline-validation.php',
             method: 'post',
             data: {
                 userInterests: interestsArray,
