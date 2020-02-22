@@ -14,14 +14,16 @@ page that will display all of the user information that is collected in sessions
                 <div class="col-md-6 pb-2">
                     <div class="card">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Name: {{ @SESSION.firstName }} {{ @SESSION.lastName }}</li>
-                            <li class="list-group-item">Gender: {{ @SESSION.userGender }}</li>
-                            <li class="list-group-item">Age: {{ @SESSION.userAge }}</li>
-                            <li class="list-group-item">Phone: {{ @SESSION.userPhone }}</li>
-                            <li class="list-group-item">Email: {{ @SESSION.userEmail }}</li>
-                            <li class="list-group-item">State: {{ @SESSION.userState }}</li>
-                            <li class="list-group-item">Seeking: {{ @SESSION.userSeeking }}</li>
-                            <li class="list-group-item">Interests: {{ @SESSION.userInterests }}</li>
+                            <li class="list-group-item">Name: {{ @SESSION.member->getFName() }} {{ @SESSION.member->getLName() }}</li>
+                            <li class="list-group-item">Gender: {{ @SESSION.member->getGender() }}</li>
+                            <li class="list-group-item">Age: {{ @SESSION.member->getAge() }}</li>
+                            <li class="list-group-item">Phone: {{ @SESSION.member->getPhone() }}</li>
+                            <li class="list-group-item">Email: {{ @SESSION.member->getEmail() }}</li>
+                            <li class="list-group-item">State: {{ @SESSION.member->getState() }}</li>
+                            <li class="list-group-item">Seeking: {{ @SESSION.member->getSeeking() }}</li>
+                            <check if="{{ @SESSION.member->membershipType() == 'premium' }}">
+                                <li class="list-group-item">Interests: {{ @SESSION.member->getInDoorInterests() }}</li>
+                            </check>
                         </ul>
                     </div>
                 </div> <!-- end of col that holds profile information -->
