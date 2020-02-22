@@ -3,7 +3,7 @@
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/views/personal-information.html
 Created: January 25, 2020
-Last Modified: February 9, 2020
+Last Modified: February 21, 2020
 Description: This file serves as first screen of the user's profile registration process. It
 accepts user information such as name, age, gender, and phone number. It posts to the next form (profile).
 There is not as much area for code reduction here other than placing the header and footer in included files.
@@ -65,6 +65,11 @@ Much of this page is build with custom input areas.
                                 <p id="error-user-phone" class="error-post"> {{@errors['phone']}}</p>
                             </check>
                         </div>
+                        <label for="premium" class="font-weight-bold">Premium Membership</label><br>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" value="premium" id="premium" name="premium[]">
+                            <label for="premium" class="form-check-label">Sign me up for a Premium Account!</label>
+                        </div> <!-- end of user input area for premium membership -->
                     </div> <!-- end of user input area (column)-->
                     <div id="privacy" class="col-md-4 pt-2 text-center">
                         <div class="alert alert-secondary" role="alert">
