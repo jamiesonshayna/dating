@@ -2,7 +2,7 @@
 /*
 @author Shayna Jamieson
 @version 1.0
-URL: http://sjamieson.greenriverdev.com/328/dating/model/inline-validation.php
+URL: http://sjamieson.greenriverdev.com/328/dating/inline-validation/inline-validation.php
 Created: January 25, 2020
 Last Modified: February 21, 2020
 Description: This file will serve to validate user input in the form. We will

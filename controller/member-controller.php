@@ -21,12 +21,20 @@ class MemberController
     private $_f3;
     private $_val;
 
+    /*
+     * Constructs Member Controller object with f3 and validation.
+     *
+     * @param fat-free object
+     */
     public function __construct($f3)
     {
         $this->_f3 = $f3;
         $this->_val = new PostValidator();
     }
 
+    /*
+     * This function displays the home page view.
+     */
     public function home()
     {
         // create a new view object by instantiating the fat-free templating class
@@ -36,6 +44,13 @@ class MemberController
         echo $view->render('views/home.html');
     }
 
+    /*
+     * This function validates form 1 personal information.
+     *
+     * All fields are validated and saved in the member object,
+     * and the user is routed to the profile view form.
+     * @param $validForm1 boolean
+     */
     public function personalInformation($validForm1)
     {
         // if we are checking our data from post
@@ -102,6 +117,14 @@ class MemberController
         echo $view->render('views/personal-information.php');
     }
 
+    /*
+     * This function validates form 2 profile information.
+     *
+     * All fields are validated and saved in the member object,
+     * and the user is routed to the interests view form if they are
+     * a premium member, otherwise they are taken to summary view.
+     * @param $validForm2 boolean
+     */
     public function profile($validForm2)
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -154,6 +177,13 @@ class MemberController
         echo $view->render('views/profile.html');
     }
 
+    /*
+     * This function validates form 3 interests information.
+     *
+     * All fields are validated and saved in the member object,
+     * and the user is routed to the summary view form.
+     * @param $validForm3 boolean
+     */
     public function interests($validForm3)
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -194,6 +224,9 @@ class MemberController
         echo $view->render('views/interests.html');
     }
 
+    /*
+     * This function takes the user to the summary view.
+     */
     public function summary()
     {
         $view = new Template();
