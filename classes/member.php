@@ -49,6 +49,18 @@ class Member
         $this->_phone = $phone;
     }
 
+    /*
+     * This method returns the type of membership.
+     *
+     * This is so that on various screens we know to display or
+     * skip premium membership details.
+     * @return String The type of membership for current user.
+     */
+    public function membershipType()
+    {
+        return "normal";
+    }
+
     // Accessors
 
     /*
@@ -91,6 +103,38 @@ class Member
         return $this->_phone;
     }
 
+    /*
+     * @return user's email
+     */
+    public function getEmail()
+    {
+        return $this->_email;
+    }
+
+    /*
+     * @return user's state
+     */
+    public function getState()
+    {
+        return $this->_state;
+    }
+
+    /*
+     * @return user's seeking preference
+     */
+    public function getSeeking()
+    {
+        return $this->_seeking;
+    }
+
+    /*
+     * @return user's bio
+     */
+    public function getBio()
+    {
+        return $this->_bio;
+    }
+
     // Mutators
 
     /*
@@ -127,4 +171,32 @@ class Member
     public function setPhone($phone) {
         $this->_phone = $phone;
     }
+
+    /*
+     * @param user's email
+     */
+    public function setEmail($email) {
+        $this->_email = $email;
+    }
+
+    /*
+     * @param user's state
+     */
+    public function setState($state) {
+        $this->_state = $state;
+    }
+
+    /*
+     * @param user's seeking
+     */
+    public function setSeeking($seeking) {
+        $this->_seeking = $seeking;
+    }
+    /*
+     * @param user's bio
+     */
+    public function setBio($bio) {
+        $this->_bio = $bio;
+    }
+
 }

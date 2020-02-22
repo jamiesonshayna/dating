@@ -4,13 +4,10 @@
  * @version 1.0
  * URL: http://sjamieson.greenriverdev.com/328/dating/index.php
  * Date: January 16, 2020
- * Last Modified: February 9, 2020
+ * Last Modified: February 21, 2020
  * Description: This file serves to define a default route. When a user navigates to
  * the route of our directory they will be taken to the view that we have defined as views/home.html
  */
-
-// start a session - ONLY ever need to put this in our controller (all other pages get by transference)
-session_start();
 
 // Turn on error reporting
 ini_set('display_errors', 1);
@@ -18,6 +15,9 @@ error_reporting(E_ALL);
 
 require("vendor/autoload.php");
 require("models/validation.php");
+
+// start a session - ONLY ever need to put this in our controller (all other pages get by transference)
+session_start();
 
 // instantiate F3
 $f3 = Base::instance(); // invoke static
@@ -88,6 +88,14 @@ $f3->route('GET|POST /personal-information', function($f3, $validForm1) {
 
         // ALL REQUIRED FORM FIELDS ARE VALID
         if($validForm1) {
+            // check whether or not we have a premium member
+            if(isset($_POST["premium"])) {
+                $member = new PremiumMember($first, $last, $age, $gender, $phone);
+                $_SESSION['member'] = $member;
+            } else {
+                $member = new Member($first, $last, $age, $gender, $phone);
+                $_SESSION['member'] = $member;
+            }
             $f3->reroute('/profile');
         }
     }
@@ -127,7 +135,23 @@ $f3->route('GET|POST /profile', function($f3, $validForm2) {
 
         // ALL REQUIRED FORM FIELDS ARE VALID
         if($validForm2) {
-            $f3->reroute('/interests');
+            // retrieve our member object to set new attributes
+            $memberObject = $_SESSION['member'];
+
+            $memberObject->setEmail($email);
+            $memberObject->setState($state);
+            $memberObject->setSeeking($seeking);
+            $memberObject->setBio($bio);
+
+            // reset new member object with new attributes to session
+            $_SESSION['member'] = $memberObject;
+
+            // reroute to summary screen if the user is normal else, go to interests
+            if($memberObject->membershipType() == "normal") {
+                $f3->reroute('/summary');
+            } else {
+                $f3->reroute('/interests');
+            }
         }
     }
 
@@ -170,6 +194,14 @@ $f3->route('GET|POST /interests', function($f3, $validForm3) {
         }
         // ALL REQUIRED FORM FIELDS ARE VALID
         if($validForm3) {
+            // retrieve our member object to set new attributes
+            $memberObject = $_SESSION['member'];
+
+            $memberObject->setInDoorInterests($interestsText);
+
+            // save back into session for member
+            $_SESSION['member'] = $memberObject;
+
             $f3->reroute('/summary');
         }
     }

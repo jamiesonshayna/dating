@@ -25,6 +25,16 @@ class PremiumMember extends Member
     private $_inDoorInterests;
     private $_outDoorInterests;
 
+    /*
+     * This method overrides its parent's membership type.
+     *
+     * @return String Type of current user's membership.
+     */
+    public function membershipType()
+    {
+        return "premium";
+    }
+
     // Accessors
 
     /*
