@@ -60,7 +60,7 @@ Much of this page is build with custom input areas.
                         <div class="form-group">
                             <label for="phone" class="font-weight-bold"><span class="required">*</span> Phone Number</label>
                             <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phone" value="{{ @userPhone }}">
-                            <span id="error-phone" class="d-none">invalid phone number</span>
+                            <span id="error-phone" class="d-none">phone number needs to be format 1234567890</span>
                             <check if="{{isset(@errors['phone'])}}">
                                 <p id="error-user-phone" class="error-post"> {{@errors['phone']}}</p>
                             </check>

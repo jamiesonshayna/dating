@@ -91,7 +91,7 @@ class MemberController
             if($this->_val->validPhone($phone)) {
                 $_SESSION['userPhone'] = $phone;
             } else {
-                $this->_f3->set("errors['phone']","invalid phone number");
+                $this->_f3->set("errors['phone']","phone number needs to be format 1234567890");
                 $validForm1 = false;
             }
 
