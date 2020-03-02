@@ -21,7 +21,9 @@ session_start();
 
 // instantiate F3
 $f3 = Base::instance(); // invoke static
+$f3->set('DEBUG', 3);
 
+$db = new Database(); // instantiate a new database -- NEED TO CREATE THIS CLASSES
 // create our member controller class object
 $controller = new MemberController($f3);
 
