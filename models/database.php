@@ -11,6 +11,10 @@ Last Modified: March 01, 2020
 Description: This file will serve to connect to our database with credentials that are hosted
 on the server. This file will allow the dating program to insert new members, find current members,
 and get interests from the databases.
+
+*** DISCLAIMER: I have been writing my interests to storage differently the whole time. I concatenate
+ * both the indoor and outdoor interests together and store them in the session as a String. This makes
+ * it different for me to add to the database.
  */
 
 /*
@@ -27,6 +31,7 @@ and get interests from the databases.
     seeking VARCHAR(255) NULL,
     bio VARCHAR(255) NULL,
     premium tinyint NULL,
+    interests VARCHAR(255) NULL, *** MINE IS DIFFERENT FROM CLASS
     image VARCHAR(255) NULL,
     PRIMARY KEY (member_id)
     );
@@ -84,6 +89,7 @@ class Database
      * This method inserts a new member on sign-up into the database
      *
      * @param member object to get attributes for insert
+     * @param interests as a string (mine is different than class example) **
      * @return the id of the new inserted member
      */
     function insertMember($member, $interests)
@@ -97,7 +103,6 @@ class Database
             $sql .= "INSERT INTO member VALUES(default, :fname, :lname, :age, :gender, :phone, :email,
         :state, :seeking, :bio, 1, :interests, '')";
         }
-
 
         // prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -127,7 +132,19 @@ class Database
      */
     function getMembers()
     {
+        // define the query
+        $sql = "SELECT * FROM member ORDER BY lname";
 
+        // prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // no params to bind
+
+        // execute the statement
+        $statement->execute();
+
+        // get the result
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /*
@@ -138,10 +155,25 @@ class Database
      */
     function getMember($member_id)
     {
+        $sql = "SELECT * FROM member WHERE member_id = :member_id";
 
+        // prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // bind the parameters
+        $statement->bindParam(':member_id', $member_id);
+
+        // execute statement
+        $statement->execute();
+
+        return $statement->fetch();
     }
 
     /*
+     * DISCLAIMER: I wrote my program differently initially where I was already storing
+     * interests as a comma separated String that included both indoor and outdoor interests.
+     * So, to query these I already store them in the database as so.
+     *
      * This method returns the interests of a specific member from the database.
      *
      * @param Member ID for query
@@ -149,6 +181,17 @@ class Database
      */
     function getInterests($member_id)
     {
+        $sql = "SELECT interests FROM member WHERE member_id = :member_id";
 
+        // prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // bind the parameters
+        $statement->bindParam(':member_id', $member_id);
+
+        // execute statement
+        $statement->execute();
+
+        return $statement->fetch();
     }
 }

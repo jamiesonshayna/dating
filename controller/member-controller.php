@@ -237,4 +237,19 @@ class MemberController
         $view = new Template();
         echo $view->render('views/summary.html');
     }
+
+    /*
+ * This function takes the user to the summary view.
+ */
+    public function admin()
+    {
+        // query the database for all pets
+        $allMembers = $GLOBALS['db']->getMembers();
+
+        // save all pets to fat free hive
+        $this->_f3->set('members', $allMembers);
+
+        $view = new Template();
+        echo $view->render('views/admin.html');
+    }
 }

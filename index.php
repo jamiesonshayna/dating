@@ -62,5 +62,10 @@ $f3->route('GET|POST /summary', function() {
     $GLOBALS['controller']->summary();
 });
 
+// define a route to the admin display view.
+$f3->route('GET|POST /admin', function() {
+    $GLOBALS['controller']->admin();
+});
+
 // run Fat-Free
 $f3->run();
