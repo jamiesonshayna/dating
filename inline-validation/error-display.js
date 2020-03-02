@@ -3,12 +3,15 @@
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/models/error-display.js
 Created: February 9, 2020
-Last Modified: February 9, 2020
+Last Modified: March 01, 2020
 Description: This file serves to help with AJAX calls. The forms on each page have
 real-time validation and use AJAX to handle displaying the span errors as well as
 validating with our PHP validation file.
  */
 $(document).ready(function() {
+    // create data table on admin page
+    $('#member-table').DataTable();
+
     // validate the first name with PHP file and provide inline validation
     $("#first-name").on("blur", function() {
         let first = document.getElementById('first-name').value;

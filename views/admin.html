@@ -5,7 +5,45 @@ URL: http://sjamieson.greenriverdev.com/328/dating/views/admin.html
 Created: March 01, 2020
 Last Modified: March 01, 2020
 Description: This file serves as the admin page for the dating website. This page displays
-data from the database on the server.
+data from the database on the server. The query takes all currently saved members and displays
+all of their  profile data from a fat-free hive object.
 -->
 <include href="views/header-with-nav.html">
+    <table id="member-table" class="display">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>State</th>
+            <th>Gender</th>
+            <th>Seeking</th>
+            <th>Premium</th>
+            <th>Interests</th>
+        </tr>
+        </thead>
+        <tbody>
+        <repeat group="{{ @members }}" value="{{ @member }}">
+            <tr>
+                <td>{{ @member['member_id'] }}</td>
+                <td>{{ @member['fname'] }} {{ @member['lname'] }}</td>
+                <td>{{ @member['age'] }}</td>
+                <td>{{ @member['gender'] }}</td>
+                <td>{{ @member['phone'] }}</td>
+                <td>{{ @member['email'] }}</td>
+                <td>{{ @member['state'] }}</td>
+                <td>{{ @member['seeking'] }}</td>
+                <td>
+                    <check if="{{ @member['premium'] == 0}}">
+                        <true><input type="checkbox"></true>
+                        <false><input type="checkbox" checked></false>
+                    </check>
+                </td>
+                <td>{{ @member['interests'] }}</td>
+            </tr>
+        </repeat>
+        </tbody>
+    </table>
     <include href="views/footer.html">

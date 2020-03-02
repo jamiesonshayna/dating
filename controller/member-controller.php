@@ -4,7 +4,7 @@
 @version 1.0
 URL: http://sjamieson.greenriverdev.com/328/dating/controller/member-controller.php
 Created: February 21, 2020
-Last Modified: February 21, 2020
+Last Modified: March 01, 2020
 Description: This file serves to help refine the index.php file for this project. Here
 we can define all of our routes with function calls that can be made from index. These
 functions will do the validation work, routing, session saving, etc.
@@ -239,14 +239,14 @@ class MemberController
     }
 
     /*
- * This function takes the user to the summary view.
- */
+     * This function takes the user to the summary view.
+     */
     public function admin()
     {
-        // query the database for all pets
+        // query the database for all members
         $allMembers = $GLOBALS['db']->getMembers();
 
-        // save all pets to fat free hive
+        // save all members to fat free hive for admin summary
         $this->_f3->set('members', $allMembers);
 
         $view = new Template();
