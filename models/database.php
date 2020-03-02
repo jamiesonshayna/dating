@@ -133,7 +133,7 @@ class Database
     function getMembers()
     {
         // define the query
-        $sql = "SELECT * FROM member ORDER BY lname";
+        $sql = "SELECT * FROM member ORDER BY lname, fname";
 
         // prepare the statement
         $statement = $this->_dbh->prepare($sql);
