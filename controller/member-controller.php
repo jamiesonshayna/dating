@@ -166,6 +166,7 @@ class MemberController
 
                 // reroute to summary screen if the user is normal else, go to interests
                 if($memberObject->membershipType() == "normal") {
+                    $GLOBALS['db']->insertMember($_SESSION['member'], '');
                     $this->_f3->reroute('/summary');
                 } else {
                     $this->_f3->reroute('/interests');
@@ -197,9 +198,11 @@ class MemberController
             if($this->_val->validInterests($interests, $validInterests)) {
                 if(is_array($_POST['interests'])) {
                     foreach($_POST['interests'] as $value) {
-                        $interestsText .= $value . " ";
+                        $interestsText .= $value . ", ";
                     }
                 }
+
+                $interestsText = substr($interestsText, 0, strlen($interestsText) - 2);
 
                 $this->_f3->set('userInterests', $interestsText);
                 $_SESSION['userInterests'] = $interestsText;
@@ -216,6 +219,8 @@ class MemberController
 
                 // save back into session for member
                 $_SESSION['member'] = $memberObject;
+
+                $GLOBALS['db']->insertMember($_SESSION['member'], $interestsText);
 
                 $this->_f3->reroute('/summary');
             }
